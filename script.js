@@ -27,3 +27,29 @@ counter.increment();
 counter.increment();
 counter.decrement();
 console.log(counter.getCount());
+
+
+
+
+// 3) Напишите рекурсивную функцию findElementByClass, которая принимает корневой элемент дерева DOM и название класса в качестве аргументов и возвращает первый найденный элемент с указанным классом в этом дереве.
+
+
+function findElementByClass(root, targetClass) {
+    if (root.classList && root.classList.contains(targetClass)) {
+        return root;
+    }
+
+    for (let i = 0; i < root.children.length; i++) {
+        const child = root.children[i];
+        const foundElem = findElementByClass(child, targetClass);
+
+        if (foundElem) {
+            return foundElem;
+        }
+    }
+
+    return null;
+}
+
+const html = document.documentElement;
+console.log(findElementByClass(html, "text"));
